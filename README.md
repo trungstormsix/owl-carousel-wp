@@ -1,14 +1,18 @@
-Herbert
+owl Carosel - oCoder
 ===============
 
-Welcome to Herbert. Please check out the docs [here](http://getherbert.com/).
+Welcome to oCoder owl Carosel plugin. This plugin is build base on [Herbert] (http://getherbert.com/) and [owl carousel](https://github.com/OwlFonk/OwlCarousel).
 
-Check out the example plugin [here](https://github.com/getherbert/example-plugin).
+### 1.Getting Started
++ Clone plugin
++ Install [composer] (https://getcomposer.org/) or learn how to use composer
++ Run composer install in the plugin folder to get library 
+```code
+...\plugin\owlCarousel>composer install
 
-You can find a full plugin built in Herbert [here](https://github.com/bigbitecreative/wordpress-socializr).
+### 2. Active plugin in wordpress admin
+### 3. Test front page
+go to the url: http://yourhost/sip/info
 
----
-If you are looking for the old version, you can find it here: https://github.com/getherbert/herbert/tree/pre
-And the docs for that version: http://getherbert.com/pre
 
 
