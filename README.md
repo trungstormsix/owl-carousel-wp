@@ -13,6 +13,7 @@ Welcome to oCoder owl Carosel plugin. This plugin is build base on [Herbert] (ht
 ### 2. Active plugin in wordpress admin
 ### 3. Test front page
 go to the url: http://yourhost/sip/info
-
+### 4. Using shortcode
+add this shortcode to any post or page to show carousel: [oCoder-owl-carousel carousel_id="your_id"]
 
 

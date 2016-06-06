@@ -14,7 +14,7 @@ $api->add('helper', function ()
     return forward_static_call_array(__NAMESPACE__ . '\\Helper::' . $method, $args);
 });
 
-$api->add('info', function($id = 1)
+$api->add('getCarousel', function($id = "")
 {
-    return Post::find($id);
+    return "Carousel ".$id;//Post::find($id);
 });

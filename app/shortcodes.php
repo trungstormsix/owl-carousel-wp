@@ -1,8 +1,9 @@
 <?php namespace oCoder;
 
 /** @var \Herbert\Framework\Shortcode $shortcode */
-$shortcode->add('UserProGetUsername', 'getUsername');
+//$shortcode->add('UserProGetUsername', 'getUsername');
 $shortcode->add(
-    'MyPluginShowPostName',
-    'oCoder::info'
+    'oCoder-owl-carousel',
+    'oCoder::getCarousel',
+    ['carousel_id' => 'id']
 );
