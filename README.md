@@ -9,7 +9,7 @@ Welcome to oCoder owl Carosel plugin. This plugin is build base on [Herbert] (ht
 + Run composer install in the plugin folder to get library 
 ```code
 ...\plugin\owlCarousel>composer install
-
+```
 ### 2. Active plugin in wordpress admin
 ### 3. Test front page
 go to the url: http://yourhost/sip/info
