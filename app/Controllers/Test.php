@@ -48,4 +48,13 @@ class Test
 		    'content' => 'Congrats on your demo view.'
 		]);
     }
+    /**
+    * for API call
+    **/
+    public function getContentForAPI($id){
+          return view('@oCoder/site/example.twig', [
+            'title'   => 'My Demo '.$id,
+            'content' => 'Congrats api demo view.'
+        ]);
+    }
 }

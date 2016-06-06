@@ -21,6 +21,10 @@ http://yourhost/carousel-controller/$id
 
 ```
 ### 4. Using shortcode
-add this shortcode to any post or page to show carousel: [oCoder-owl-carousel carousel_id="your_id"]
+add this shortcode to any post or page to show carousel: 
+```code
+[oCoder-owl-carousel carousel_id="your_id"]
+[oCoder-owl-carousel-controller carousel_id="your_id"]
+```
 
 
