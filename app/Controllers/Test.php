@@ -6,7 +6,7 @@ use Herbert\Framework\Http;
 use Herbert\Framework\Exceptions\HttpErrorException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Herbert\Framework\Models\Post;
-
+use oCoder\Helper;
 /**
  * Class Test.
  */
@@ -30,6 +30,7 @@ class Test
      */
     public function getCarousel($id, Http $http)
     {
+        
         $post = Post::find($id);
 
         if(!$post)
@@ -41,17 +42,19 @@ class Test
         {
             return json_response($post);
         }
-// var_dump($post);
+        // var_dump($post);
         return view('@oCoder/site/example.twig', [
 		    'title'   => 'My Demo '.$id.' '.$post->post_title,
 		    'content' => 'Congrats on your demo view.'
 		]);
     }
+
+
     /**
     * for API call
     **/
     public function getContentForAPI($id){
-          return view('@oCoder/site/example.twig', [
+          return view('@oCoder/site/api.twig', [
             'title'   => 'My Demo '.$id,
             'content' => 'Congrats api demo view.'
         ]);

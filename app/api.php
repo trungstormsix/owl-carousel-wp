@@ -22,8 +22,8 @@ $api->add('helper', function ()
 /*get carousel*/
 $api->add('getCarousel', function($id = "")
 {
-	
-    return "Carousel ".$id;
+	return (new Test)->getContentForAPI($id);
+    // return "Carousel ".$id;
 });
 
 /*api call controller*/
