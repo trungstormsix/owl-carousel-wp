@@ -6,7 +6,7 @@ use Herbert\Framework\Http;
 use Herbert\Framework\Exceptions\HttpErrorException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Herbert\Framework\Models\Post;
- 
+
 /**
  * Class Test.
  */
@@ -24,27 +24,26 @@ class Test
 	 
 
 
-
  
     /**
      * Show the post for the given id.
      */
     public function getCarousel($id, Http $http)
     {
-        // $post = Post::find($id);
+        $post = Post::find($id);
 
-        // if(!$post)
-        // {
-        //     return response('Post not found', 404);
-        // }
+        if(!$post)
+        {
+            return response('Post not found', 404);
+        }
 
-        // if($http->has('json'))
-        // {
-        //     return json_response($post);
-        // }
-
+        if($http->has('json'))
+        {
+            return json_response($post);
+        }
+// var_dump($post);
         return view('@oCoder/site/example.twig', [
-		    'title'   => 'My Demo '.$id,
+		    'title'   => 'My Demo '.$id.' '.$post->post_title,
 		    'content' => 'Congrats on your demo view.'
 		]);
     }
