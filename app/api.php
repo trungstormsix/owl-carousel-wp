@@ -8,7 +8,7 @@ use Herbert\Framework\Models\Post;
  */
 
 //using controller
-use oCoder\Controllers\Test;
+use oCoder\Controllers\FrontController;
 
 $api->add('helper', function ()
 {
@@ -22,12 +22,12 @@ $api->add('helper', function ()
 /*get carousel*/
 $api->add('getCarousel', function($id = "")
 {
-	return (new Test)->getContentForAPI($id);
+	return (new FrontController)->getContentForAPI($id);
     // return "Carousel ".$id;
 });
 
 /*api call controller*/
 $api->add('getContentForAPI', function($id)
 {
-    return (new Test)->getContentForAPI($id);
+    return (new FrontController)->getContentForAPI($id);
 });

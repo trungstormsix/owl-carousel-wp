@@ -8,15 +8,18 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Herbert\Framework\Models\Post;
 use oCoder\Helper;
 /**
- * Class Test.
+ * Class FrontController.
  */
-class Test
+class FrontController
 {
-	function info(){
-		//get url
-		echo route_url('oCoder::carousel_url');
- 		return view('@oCoder/site/example.twig', [
+	function index(){
+		//js 
+
+  		return view('@oCoder/site/example.twig', [
 		    'title'   => 'My Demo ',
+            'js'      =>  Helper::assetUrl('/js/responsive_testemonial_carousel.js'),
+            'css'     => Helper::assetUrl('/css/responsive_testemonial_carousel.css'),   
+            'assetUrl'=>  Helper::assetUrl(),
 		    'content' => 'Congrats on your demo view.'
 		]);
 	}

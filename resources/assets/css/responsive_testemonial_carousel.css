@@ -1,3 +1,7 @@
+.uc_quote_slider .slick-list{
+    outline: none;
+}
+
 .uc_quote_slider .slick-dots {
     display: table;
     margin: 20px auto 0;

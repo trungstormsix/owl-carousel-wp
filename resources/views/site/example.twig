@@ -2,11 +2,109 @@
 <html>
     <head>
         <title>My Carousel</title>
+    	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,700,800' rel='stylesheet' type='text/css'>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+		<link href="{{ css }}"  rel='stylesheet' type='text/css'>
+		<script src="{{ js }}"></script>
      </head>
     <body>
             {{ frontJS }}
-
+           
         <h1>{{ title }}</h1>
-        <p>{{ content }}</p>
+         	<!-- start of slider add on -->
+	<div class="uc_quote_slider">
+		<!-- start of block item -->
+		<div class="uc_quote_item">
+			<div class="uc_quote_info">
+				<p>It's iaculis lectus sed mattis nibh phasellus iaculis pulvinar purus vitae ligula interdum at mattis dui sodales non neque sit amet enim</p>
+				<div class="uc_author">
+					<img class="uc_author_avatar" src="{{ assetUrl }}/1.jpg" height="48" width="48" alt="" />
+					<div class="uc_author_info">
+						<div class="uc_name">Joseph Doe</div>
+						<div class="uc_company">@company</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- end of block item -->
+
+
+		<!-- start of block item -->
+		<div class="uc_quote_item">
+			<div class="uc_quote_info">
+				<p>It's iaculis lectus sed mattis nibh phasellus iaculis pulvinar purus vitae ligula interdum at mattis dui sodales non neque sit amet enim</p>
+				<div class="uc_author">
+					<img class="uc_author_avatar" src="{{ assetUrl }}/2.jpg" height="48" width="48" alt="" />
+					<div class="uc_author_info">
+						<div class="uc_name">Stephen Doe</div>
+						<div class="uc_company">@company</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- end of block item -->
+
+		<!-- start of block item -->
+		<div class="uc_quote_item">
+			<div class="uc_quote_info">
+				<p>It's iaculis lectus sed mattis nibh phasellus iaculis pulvinar purus vitae ligula interdum at mattis dui sodales non neque sit amet enim</p>
+				<div class="uc_author">
+					<img class="uc_author_avatar" src="{{ assetUrl }}/1.jpg" height="48" width="48" alt="" />
+					<div class="uc_author_info">
+						<div class="uc_name">Mary Christopher</div>
+						<div class="uc_company">@company</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- end of block item -->
+
+		<!-- start of block item -->
+		<div class="uc_quote_item">
+			<div class="uc_quote_info">
+				<p>It's iaculis lectus sed mattis nibh phasellus iaculis pulvinar purus vitae ligula interdum at mattis dui sodales non neque sit amet enim</p>
+				<div class="uc_author">
+					<img class="uc_author_avatar" src="{{ assetUrl }}/2.jpg" height="48" width="48" alt="" />
+					<div class="uc_author_info">
+						<div class="uc_name">Joseph Doe</div>
+						<div class="uc_company">@company</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- end of block item -->
+	</div>
+	<!-- start of slider 1 add on -->
+
+	<script>
+		// Initialize Carousel
+		$('.uc_quote_slider').slick({
+			infinite: true,
+			slidesToShow: 3,
+			slidesToScroll: 1,
+			arrows: false,
+			dots: true,
+			speed: 300,
+			responsive: [{
+				breakpoint: 1024,
+				settings: {
+					slidesToShow: 3,
+					slidesToScroll: 1
+				}
+			}, {
+				breakpoint: 900,
+				settings: {
+					slidesToShow: 2,
+					slidesToScroll: 1
+				}
+			}, {
+				breakpoint: 767,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1
+				}
+			}]
+		});
+	</script>
      </body>
 </html>

@@ -22,12 +22,12 @@ $router->get([
 $router->get([
     'as'   => 'carousel_url',
     'uri'  => '/carousel-controller',
-    'uses' => __NAMESPACE__ . '\Controllers\Test@info'
+    'uses' => __NAMESPACE__ . '\Controllers\FrontController@index'
 ]);
 
 //router with params
 $router->get([
     'as'   => 'carouselControllerWithParam',
     'uri'  => '/carousel-controller/{id}',
-    'uses' => __NAMESPACE__ . '\Controllers\Test@getCarousel'
+    'uses' => __NAMESPACE__ . '\Controllers\FrontController@getCarousel'
 ]);
