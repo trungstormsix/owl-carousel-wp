@@ -12,8 +12,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class AdminController
 {
 	function index(){
-		 
-		 
+		
  		return view('@oCoder/admin/panel.twig', [
 		    'title'   => 'My Demo Admin Controller',
 		    'content' => 'Congrats on your panel demo view.'

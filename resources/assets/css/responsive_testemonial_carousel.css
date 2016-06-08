@@ -1,3 +1,7 @@
+.uc_quote_slider{
+    width: 100%;
+    overflow: hidden;
+}
 .uc_quote_slider .slick-list{
     outline: none;
 }

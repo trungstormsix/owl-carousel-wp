@@ -59,6 +59,7 @@ class FrontController
     public function getContentForAPI($id){
           return view('@oCoder/site/api.twig', [
             'title'   => 'My Demo '.$id,
+            'assetUrl'=>  Helper::assetUrl(),
             'content' => 'Congrats api demo view.'
         ]);
     }
