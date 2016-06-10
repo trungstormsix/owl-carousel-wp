@@ -1,0 +1,10 @@
+
+    <title>My Webpage</title>
+    <form id="form1" method="post" action="{{ panel_url('Training::mainPanel2', {'action':'add'}) }}">
+        <label>Title </label><br/>
+        <input name="title">
+        <br/>
+        <label>Number of slide </label><br/>
+        <input name="number">        
+        <input type="submit" name="submit" class="button button-primary" value="Submit" />
+    </form>

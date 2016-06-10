@@ -1,0 +1,9 @@
+
+<div>
+<li>Title / Number of Slide </li>
+{% for item in training %}
+<li>{{ item.title }}/{{ item.number }}</li>
+{% else %}
+Nothing
+{% endfor %}
+</div>
