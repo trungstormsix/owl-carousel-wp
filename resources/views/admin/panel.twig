@@ -1,15 +1,18 @@
 
 <div class="wrap">
 	<div class="title_line">
-		<h1>DOASBAORD</h1>
+		<h1>Owl Carousel</h1>
 
 		<ul>
 			{% for item in ocoder %}
-				<li>{{ item.name }}/{{ item.company }}</li>
+				<li> 
+					<a href="http://plugindemo.local/wp-admin/admin.php?page=myplugin-configure"> {{ item.name }}</a>
+
+				</li>
 			{% else %}
 			Nothing
 			{% endfor %}
 		</ul>
-		
+
 	</div>
 </div>
