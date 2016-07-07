@@ -1,4 +1,15 @@
 
-{{ postsJS }}
-<h1>{{ title }}</h1>
-<p>{{ content }}</p>
+<div class="wrap">
+	<div class="title_line">
+		<h1>DOASBAORD</h1>
+
+		<ul>
+			{% for item in ocoder %}
+				<li>{{ item.name }}/{{ item.company }}</li>
+			{% else %}
+			Nothing
+			{% endfor %}
+		</ul>
+		
+	</div>
+</div>

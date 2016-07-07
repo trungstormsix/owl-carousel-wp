@@ -1,17 +1,17 @@
 <?php
 
-namespace Training\Models;
+namespace oCoder\Models;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class Training extends Eloquent
+class oCoder extends Eloquent
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'training_form';
+    protected $table = 'ocoder_demo';
 
     /**
      * The attributes that are mass assignable.

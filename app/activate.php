@@ -16,3 +16,11 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 //     $table->increments('id');
 //     $table->string('title');
 // });
+Capsule::schema()->create('ocoder_demo', function($table)
+{
+    $table->increments('id');
+    $table->string('name');
+    $table->string('content');
+    $table->string('company');
+    $table->string('image_link');
+});

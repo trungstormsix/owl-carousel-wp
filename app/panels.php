@@ -6,7 +6,8 @@ $panel->add([
     'title'  => 'Owl Carousel',
     'slug'   => 'myplugin-index',
     'icon'   => 'dashicons-format-gallery',
-    'uses'   => __NAMESPACE__ . '\Controllers\AdminController@index'
+    'uses'   => __NAMESPACE__ . '\Controllers\AdminController@index',
+    'post.add' => __NAMESPACE__ . '\Controllers\AdminController@add'
 ]);
 
 $panel->add([

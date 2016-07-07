@@ -24,10 +24,6 @@ class FrontController
 		]);
 	}
  
-	 
-
-
- 
     /**
      * Show the post for the given id.
      */

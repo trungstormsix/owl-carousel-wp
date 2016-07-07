@@ -1,0 +1,29 @@
+<div class="wrap">
+    <h2>Customs Slider</h2>
+    <form id="form1" method="post" action="{{ panel_url('oCoder::mainPanel', {'action':'add'}) }}">
+        <label>Name </label><br/>
+        <input name="name">
+        <br/>
+
+        <label>Content Text </label><br/>
+        <input name="content"><br/>
+
+        <label>Company</label><br/>
+        <input name="company"><br/>
+        <!-- label>Upload Images</label><br/>  
+			<div id="wp-content-media-buttons" class="wp-media-buttons">
+				<button type="button" id="insert-media-button" class="button insert-media add_media" data-editor="content">
+					<span class="wp-media-buttons-icon"></span> Add image
+
+				</button>
+			</div> -->
+        <label for="upload_image">
+            <input id="upload_image" type="text" size="36" name="image_link" value="http://" /> 
+                <button type="button" id="insert-media-button" class="button insert-media add_media" data-editor="content">
+                    <span class="wp-media-buttons-icon"></span> Add image
+                </button>
+            <br />
+        </label>
+        <input type="submit" name="submit" class="button button-primary" value="Submit" />
+    </form>
+</div>

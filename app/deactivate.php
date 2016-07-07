@@ -13,3 +13,4 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 
 //delete table carousels
 // Capsule::schema()->dropIfExists('carousels');
+Capsule::schema()->dropIfExists('ocoder_demo');
