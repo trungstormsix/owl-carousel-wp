@@ -16,7 +16,8 @@
 
         </div>
         <p>
-        <button type="button" name="image_link"  id="insert-media-button"  >
+        <input type="hidden" name="image_link" id="image_link" />
+        <button type="button"   id="insert-media-button"  >
           <span class="wp-media-buttons-icon"></span> Add image 
         </button>
         </p>
@@ -72,6 +73,7 @@ jQuery('#insert-media-button').click(function() {
           console.log(attachment);
           //add slide to slides
            $("#config_slides").append("<div class='config_slide_element'>"+'<button class="button-link media-modal-close" type="button"><span class="media-modal-icon"><span class="screen-reader-text">Close media panel</span></span></button>'+"<img  src='" +attachment.url+"'><div class='config_slide_info'><h1>"+attachment.title+"</h1><p class='config_description'>" +attachment.description+"</p></div></div>");
+           $("#image_link").attr('value',attachment.url);
     });
   });
 
@@ -83,6 +85,7 @@ jQuery('#insert-media-button').click(function() {
   **/
   jQuery("#config_slides").on("click", ".media-modal-close", function(){
       jQuery(this).closest(".config_slide_element").remove();
+       $("#image_link").attr('value',"");
   })
   /**
   ** select image to edit slide information

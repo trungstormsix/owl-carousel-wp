@@ -1,18 +1,37 @@
 
 <div class="wrap">
 	<div class="title_line">
-		<h1>Owl Carousel</h1>
-
-		<ul>
+		<h1>Owl Carousel
+			<a href="http://ocoder_plugins.local/wp-admin/admin.php?page=myplugin-configure" class="page-title-action">Add New</a>
+		</h1>
+		<table class="wp-list-table widefat fixed striped">
+		<thead>
+			<tr>
+				<td id="cb" class="manage-column column-cb check-column"></td>
+				<th>Name</th>
+				<th>Content</th>
+				<th>Image Url</th>
+			</tr>
+		</thead>
+		<tbody id="the-list">
 			{% for item in ocoder %}
-				<li> 
-					<a href="http://plugindemo.local/wp-admin/admin.php?page=myplugin-configure"> {{ item.name }}</a>
 
-				</li>
+				<tr> 
+					<th></th>
+					<td><a href="http://plugindemo.local/wp-admin/admin.php?page=myplugin-configure"> {{ item.name }}</a></td>
+					<td> {{ item.content }}</td>
+					<td> {{ item.image_link }}</td>
+				</tr>
 			{% else %}
-			Nothing
-			{% endfor %}
-		</ul>
-
+			<tr> 
+				<td class="colspanchange" colspan="4">Nothing.</td>
+			</tr>
+			
+			{% endfor %}	
+		</tbody>
+		
+			
+		
+		</table>
 	</div>
 </div>
