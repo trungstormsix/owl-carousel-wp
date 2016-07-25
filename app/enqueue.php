@@ -5,11 +5,15 @@ $enqueue->admin([
     'as'  => 'postsJS',
     'src' => Helper::assetUrl('/js/admin.js')
 ]);
+$enqueue->admin([
+    'as'  => 'adminCSS',
+    'src' => Helper::assetUrl('/css/admin.css')
+]);
 
 /**
 ** site script
 **/
-        wp_enqueue_script('jquery');
+wp_enqueue_script('jquery');
 
 $enqueue->front([
     'as'  => 'frontJS',

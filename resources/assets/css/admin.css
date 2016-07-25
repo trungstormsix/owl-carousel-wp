@@ -1,0 +1,62 @@
+.config_slide_element{
+	display: inline-block;
+	width: 30%;
+	margin-left: 5px;
+	margin-bottom: 5px;
+	position: relative;
+	cursor: pointer;
+}
+.config_slide_element.selected{
+	   box-shadow: 0 0 0 3px #fff inset, 0 0 0 7px #0073aa inset;
+}
+.config_slide_element img{
+	width: 100%;
+	display: block;
+}
+
+.config_slide_element .config_slide_info{
+	position: absolute;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.5);
+	color: white;
+	width: 100%;
+	padding: 0 5px;
+	box-sizing: border-box;
+}
+.config_slide_element .config_slide_info h1{
+	color: white;
+}
+.config_slide_element .config_slide_info .config_description{
+	display: none;
+	transition: all 0.5s ease-out;
+	color: white;
+	-moz-transition:all 0.5s ease-out;
+}
+
+.config_slide_element .config_slide_info:hover .config_description,.config_slide_element.selected .config_slide_info  .config_description {
+	display: block;
+	transition: all 0.5s ease-out;
+	-moz-transition:all 0.5s ease-out;
+}
+
+.config_slide_element .media-modal-close{
+	box-shadow: none;
+	outline: none;
+	background: rgba(0, 0, 0, 0.3)
+}
+.config_slide_element .media-modal-close .media-modal-icon::before{
+	color: white;
+}
+.config_slide_element .media-modal-close:hover .media-modal-icon::before{
+	color: #880000;
+}
+
+.edit_slide_content{
+	display: none;
+	right: 10px; 
+	position: fixed; 
+	top: calc(50%);
+	background: #f3f3f3 none repeat scroll 0 0;
+	z-index: 1001;
+	height: 100%;
+}
