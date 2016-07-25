@@ -11,6 +11,10 @@ use oCoder\Models\oCoder;
  */
 class AdminController
 {
+
+	/**
+	**  list all Slideshow
+	**/
 	function index(){
 		
  		return view('@oCoder/admin/panel.twig', [
@@ -18,21 +22,47 @@ class AdminController
 		]);;
 	}
  
- 	function configure(){
+ 	
+ 	/**
+ 	*   save carousel slideshow to database
+ 	**/
+ 	function add(Http $http)
+ 	{
+ 		if(! $http->get('id')){
+ 			 $slide = new oCoder;
+ 		}else{
+ 			$slide = oCoder::find($http->get('id')); 			
+ 		}
+ 		$slide->name = $http->get('name');
+		$slide->content = $http->get('content');
+		$slide->company = $http->get('company');
+		$slide->image_link = $http->get('image_link');
+		$slide->save();
+ 		 
+ 		return redirect_response(panel_url('oCoder::editSlide', ['id'=> $slide->id ]));
+ 	}
+
+ 	/**
+     * Show the post for the given id.
+     */
+    function getCarousel(Http $http)
+    {
+        
+        $id = $http->get("id");
+         
+        $slider = oCoder::find($id);
+        
+        return view('@oCoder/admin/edit_slideshow.twig', [
+            'slider'   => $slider,
+            'content' => 'Congrats on your demo view.'
+        ]);
+    }
+	 
+
+
+	function configure(){
  		return view('@oCoder/admin/configure.twig',[
  			
  		]);;
  	}
-
- 	function add(Http $http)
- 	{
- 		oCoder::forceCreate([
- 			'name' => $http->get('name'),
- 			'content' => $http->get('content'),
- 			'company' => $http->get('company'),
- 			'image_link' => $http->get('image_link')
- 		]);
- 	return redirect_response(panel_url('oCoder::mainPanel'));
- 	}
-	 
 }

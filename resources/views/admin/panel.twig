@@ -2,12 +2,13 @@
 <div class="wrap">
 	<div class="title_line">
 		<h1>Owl Carousel
-			<a href="http://ocoder_plugins.local/wp-admin/admin.php?page=myplugin-configure" class="page-title-action">Add New</a>
+			<a href="{{ panel_url('oCoder::editSlide') }}" class="page-title-action">Add New</a>
 		</h1>
 		<table class="wp-list-table widefat fixed striped">
 		<thead>
 			<tr>
 				<td id="cb" class="manage-column column-cb check-column"></td>
+				<th>id</th>
 				<th>Name</th>
 				<th>Content</th>
 				<th>Image Url</th>
@@ -17,8 +18,9 @@
 			{% for item in ocoder %}
 
 				<tr> 
-					<th></th>
-					<td><a href="http://plugindemo.local/wp-admin/admin.php?page=myplugin-configure"> {{ item.name }}</a></td>
+					<td></td>
+					<td>{{item.id}}</td>
+					<td><a href="{{ panel_url('oCoder::editSlide', {'id': item.id }) }}"> {{ item.name }}</a></td>
 					<td> {{ item.content }}</td>
 					<td> {{ item.image_link }}</td>
 				</tr>
