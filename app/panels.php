@@ -20,17 +20,14 @@ $panel->add([
     'uses'   => __NAMESPACE__ . '\Controllers\AdminController@configure'
 ]);
 
-//  $panel->add([
-//     'type'   => 'panel',
-//     'as'     => 'mainPanel1',
-//     'title'  => 'owl Carousel',
-//     'slug'   => 'myplugin-index1',
-//     'icon'   => 'dashicons-media-video',
-//     'uses'   => function()
-//     {
-//           return view('@oCoder/admin/panel.twig', [
-// 		    'title'   => 'My Demo ',
-// 		    'content' => 'Congrats on your panel demo view.'
-// 		]);;
-//     }
-// ]);
+ $panel->add([
+    'type'   => 'subpanel',
+    'as'     => 'mainPanel',
+    'title'  => 'owl Carousel',
+    'slug'   => 'myplugin-editSlider',
+    'icon'   => 'dashicons-media-video',
+    'uses'   => __NAMESPACE__ . '\Controllers\AdminController@edit'
+   
+		]);;
+    
+]);

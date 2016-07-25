@@ -18,15 +18,19 @@
 
 				<tr> 
 					<th></th>
-					<td><a href="http://plugindemo.local/wp-admin/admin.php?page=myplugin-configure"> {{ item.name }}</a></td>
+					<td><a href="panel_url('oCoder::editSlider','id::item.id' "> {{ item.name }}</a>
+						<div class="row-actions">
+							<span class="edit"><a href="#" aria-label="Edit “New Post”">Edit</a> | </span>
+							<span class="trash"><a href="#" class="submitdelete" aria-label="Delete">Delete</a></span>
+						</div>
+					</td>
 					<td> {{ item.content }}</td>
-					<td> {{ item.image_link }}</td>
+					<td><img src="{{ item.image_link }}" style="width:50px;heigth:50px"></td>
 				</tr>
 			{% else %}
 			<tr> 
 				<td class="colspanchange" colspan="4">Nothing.</td>
 			</tr>
-			
 			{% endfor %}	
 		</tbody>
 		

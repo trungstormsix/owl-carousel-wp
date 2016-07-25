@@ -34,5 +34,19 @@ class AdminController
  		]);
  	return redirect_response(panel_url('oCoder::mainPanel'));
  	}
+ 	function delete(Http $http)
+ 	{
+	 	$set = $this->getSet($http->get('set'));
+        $set->delete();
+ 		
+ 	return redirect_response(panel_url('oCoder::mainPanel'));
+ 	}
+ 	function edit(Http $http)
+ 	{
+	 	return view('@oCoder/admin/configure.twig',[
+       ]);;	
+ 		
+ 	
+ 	}
 	 
 }
