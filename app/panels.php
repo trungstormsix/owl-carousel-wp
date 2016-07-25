@@ -4,30 +4,29 @@ $panel->add([
     'type'   => 'panel',
     'as'     => 'mainPanel',
     'title'  => 'Owl Carousel',
+    'rename' => 'SlideShows',
     'slug'   => 'myplugin-index',
     'icon'   => 'dashicons-format-gallery',
     'uses'   => __NAMESPACE__ . '\Controllers\AdminController@index',
     'post.add' => __NAMESPACE__ . '\Controllers\AdminController@add'
 ]);
-
 $panel->add([
     'type'   => 'sub-panel',
     'parent' => 'mainPanel',
-    'as'     => 'configure',
-    'title'  => 'Configure',
-    'slug'   => 'myplugin-configure',
+    'as'     => 'editSlide',
+    'title'  => 'Add SlideShow',
+    'slug'   => 'edit-slide',
     'icon'   => 'dashicons-admin-generic',
-    'uses'   => __NAMESPACE__ . '\Controllers\AdminController@configure'
+    'uses'   => __NAMESPACE__ . '\Controllers\AdminController@getCarousel'
 ]);
 
- $panel->add([
-    'type'   => 'subpanel',
-    'as'     => 'mainPanel',
-    'title'  => 'owl Carousel',
-    'slug'   => 'myplugin-editSlider',
-    'icon'   => 'dashicons-media-video',
-    'uses'   => __NAMESPACE__ . '\Controllers\AdminController@edit'
-   
-		]);;
-    
-]);
+// $panel->add([
+//     'type'   => 'sub-panel',
+//     'parent' => 'mainPanel',
+//     'as'     => 'configure',
+//     'title'  => 'Configure',
+//     'slug'   => 'myplugin-configure',
+//     'icon'   => 'dashicons-admin-generic',
+//     'uses'   => __NAMESPACE__ . '\Controllers\AdminController@configure'
+// ]);
+
