@@ -18,7 +18,7 @@
 
         </div>
         <p>
-        <input type="hidden" name="image_link" id="image_link" />
+        <input type="hidden" id="input_image_links" name="image_link" id="image_link" />
         <button type="button"   id="insert-media-button"  >
           <span class="wp-media-buttons-icon"></span> Add image 
         </button>
@@ -47,7 +47,8 @@ jQuery(document).ready(function($){
   **  call sortable for each elements. (need jquery-ui)
   **/
   $('#config_slides').sortable({
-        items: '.config_slide_element'
+        items: '.config_slide_element',
+        update: function( event, ui ) { getImages();}
     });
 /***
 **   call open media of default wordpress
@@ -77,7 +78,10 @@ jQuery('#insert-media-button').click(function() {
            $("#config_slides").append("<div class='config_slide_element'>"+'<button class="button-link media-modal-close" type="button"><span class="media-modal-icon"><span class="screen-reader-text">Close media panel</span></span></button>'+"<img  src='" +attachment.url+"'><div class='config_slide_info'><h1>"+attachment.title+"</h1><p class='config_description'>" +attachment.description+"</p></div></div>");
            $("#image_link").attr('value',attachment.url);
     });
+
+    getImages();
   });
+
 
   tgm_media_frame.open();
 
@@ -99,11 +103,14 @@ jQuery('#insert-media-button').click(function() {
       jQuery('.edit_slide_content').show();
       jQuery("#slide_title").val( jQuery(this).find(".config_slide_info > h1").html());
       jQuery("#slide_description").val( jQuery(this).find(".config_slide_info > .config_description").html());
+
     }else{
       jQuery('.edit_slide_content').hide();
       jQuery("#slide_title").val("");
       jQuery("#slide_description").val("");
     }
+
+
 })
 
  /**
@@ -112,9 +119,25 @@ jQuery('#insert-media-button').click(function() {
  jQuery(".edit_slide_content .apply_slide_content ").on("click", function(){
   jQuery("#config_slides .selected .config_slide_info > h1").html(jQuery("#slide_title").val());
   jQuery("#config_slides .selected .config_slide_info > .config_description").html(jQuery("#slide_description").val());
+   getImages();
  });
 
 
+  function getImages(){
+    images = [];
+    i = 0;
+    $("#config_slides").find(".config_slide_element").each(function(){
+      img = new Object();
+
+      img.title = $(this).find('.config_slide_info h1').html();
+      img.description = $(this).find('.config_slide_info .config_description').html();;
+      img.src = $(this).find('.config_slide_element img').html();
+
+      images[i++] = img;
+    })
+    console.log(JSON.stringify(images));
+      jQuery("#input_image_links").val(JSON.stringify(images));
+  }
 });
 
 </script>
