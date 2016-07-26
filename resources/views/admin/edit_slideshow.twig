@@ -28,6 +28,10 @@
         <input type="submit" name="submit" class="button button-primary" value="Save changes" />
     </form>
     <div class="edit_slide_content">
+    <p>
+        <label>Url</label><br>
+        <input type="text" id="slide_url" readonly>
+      </p>
       <p>
         <label>Slide Title</label><br>
         <input type="text" id="slide_title">
@@ -43,6 +47,7 @@
 </div>
 <script type="text/javascript">
 jQuery(document).ready(function($){
+
   /**
   **  call sortable for each elements. (need jquery-ui)
   **/
@@ -75,8 +80,9 @@ jQuery('#insert-media-button').click(function() {
       attachment = attachment.toJSON();
           console.log(attachment);
           //add slide to slides
-           $("#config_slides").append("<div class='config_slide_element'>"+'<button class="button-link media-modal-close" type="button"><span class="media-modal-icon"><span class="screen-reader-text">Close media panel</span></span></button>'+"<img  src='" +attachment.url+"'><div class='config_slide_info'><h1>"+attachment.title+"</h1><p class='config_description'>" +attachment.description+"</p></div></div>");
-           $("#image_link").attr('value',attachment.url);
+           $("#config_slides").append("<div class='config_slide_element'>"+'<button class="button-link media-modal-close" type="button"><span class="media-modal-icon"><span class="screen-reader-text">Close media panel</span></span></button>'+"<img  src='" +attachment.url+"'><div class='config_slide_info'><h1>"+attachment.title+"</h1><p class='config_description'>" +attachment.description+"</p'><p class='config_url hidden'>"+attachment.url+"</p></div></div>");
+
+            
     });
 
     getImages();
@@ -91,7 +97,6 @@ jQuery('#insert-media-button').click(function() {
   **/
   jQuery("#config_slides").on("click", ".media-modal-close", function(){
       jQuery(this).closest(".config_slide_element").remove();
-       $("#image_link").attr('value',"");
   })
   /**
   ** select image to edit slide information
@@ -101,6 +106,8 @@ jQuery('#insert-media-button').click(function() {
     
     if( jQuery(this).hasClass("selected")){
       jQuery('.edit_slide_content').show();
+      //alert($(".config_slide_element.selected> img").attr('src'));
+      jQuery("#slide_url").val( $(".config_slide_element.selected > img").attr('src'));
       jQuery("#slide_title").val( jQuery(this).find(".config_slide_info > h1").html());
       jQuery("#slide_description").val( jQuery(this).find(".config_slide_info > .config_description").html());
 
@@ -117,6 +124,7 @@ jQuery('#insert-media-button').click(function() {
   ** select image to edit slide information
   **/
  jQuery(".edit_slide_content .apply_slide_content ").on("click", function(){
+ 
   jQuery("#config_slides .selected .config_slide_info > h1").html(jQuery("#slide_title").val());
   jQuery("#config_slides .selected .config_slide_info > .config_description").html(jQuery("#slide_description").val());
    getImages();
@@ -130,9 +138,9 @@ jQuery('#insert-media-button').click(function() {
       img = new Object();
 
       img.title = $(this).find('.config_slide_info h1').html();
-      img.description = $(this).find('.config_slide_info .config_description').html();;
-      img.src = $(this).find('.config_slide_element img').html();
-
+      img.description = $(this).find('.config_slide_info .config_description').html();
+      img.src =  $(this).find('.config_slide_info .config_url').html();
+      
       images[i++] = img;
     })
     console.log(JSON.stringify(images));

@@ -22,5 +22,5 @@ Capsule::schema()->create('ocoder_demo', function($table)
     $table->string('name');
     $table->string('content');
     $table->string('company');
-    $table->string('image_link');
+    $table->text('image_link');
 });

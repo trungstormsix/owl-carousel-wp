@@ -12,13 +12,14 @@
 
         <label>Company</label><br/>
         <input type="text" name="company"><br/>
-         
+         <label>Link</label><br/>
+        <input type="text" name="image_link" id="image_link" value="1233444">
         <label>Image</label> 
         <div id="config_slides" style="width: 100%; float: left;">
 
         </div>
         <p>
-        <input type="hidden" name="image_link" id="image_link" />
+        
         <button type="button"   id="insert-media-button"  >
           <span class="wp-media-buttons-icon"></span> Add image 
         </button>
@@ -71,11 +72,16 @@ jQuery('#insert-media-button').click(function() {
   tgm_media_frame.on('select', function(){
     var selection = tgm_media_frame.state().get('selection');
     selection.map( function( attachment ) {
+
+     $("#image_link").attr("value",attachment.url);
+
+           console.log(attachment.url);
       attachment = attachment.toJSON();
-          console.log(attachment);
+          
           //add slide to slides
            $("#config_slides").append("<div class='config_slide_element'>"+'<button class="button-link media-modal-close" type="button"><span class="media-modal-icon"><span class="screen-reader-text">Close media panel</span></span></button>'+"<img  src='" +attachment.url+"'><div class='config_slide_info'><h1>"+attachment.title+"</h1><p class='config_description'>" +attachment.description+"</p></div></div>");
-           $("#image_link").attr('value',attachment.url);
+           
+           console.log(attachment);
     });
   });
 
@@ -99,6 +105,7 @@ jQuery('#insert-media-button').click(function() {
       jQuery('.edit_slide_content').show();
       jQuery("#slide_title").val( jQuery(this).find(".config_slide_info > h1").html());
       jQuery("#slide_description").val( jQuery(this).find(".config_slide_info > .config_description").html());
+      jQuery("#slide_link").val( jQuery(this).find(".config_slide_info > .config_description").html());
     }else{
       jQuery('.edit_slide_content').hide();
       jQuery("#slide_title").val("");

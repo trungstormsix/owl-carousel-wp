@@ -31,7 +31,8 @@ class AdminController
  		if(! $http->get('id')){
  			 $slide = new oCoder;
  		}else{
- 			$slide = oCoder::find($http->get('id')); 			
+ 			$slide = oCoder::find($http->get('id'));
+
  		}
  		$slide->name = $http->get('name');
 		$slide->content = $http->get('content');
@@ -52,6 +53,10 @@ class AdminController
          
         $slider = oCoder::find($id);
         
+ 			$objectJson=json_decode($slider->image_link);
+ 			var_dump($objectJson);
+ 			echo $slider->image_link;
+ 			exit;
         return view('@oCoder/admin/edit_slideshow.twig', [
             'slider'   => $slider,
             'content' => 'Congrats on your demo view.'
