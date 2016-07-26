@@ -14,6 +14,38 @@
         <input type="text" name="company"><br/>
          
         <label>Image</label> 
+       
+          {% if arrItems %}
+          <p><i>* Click Images to edit</i></p>
+               <div id="config_slides" style="width: 100%; float: left;">
+                  {% for item in arrItems %}
+                      <div class='config_slide_element'>
+                          <button class="button-link media-modal-close" type="button"><span class="media-modal-icon">
+                              <span class="screen-reader-text">Close media panel</span></span>
+                        </button>
+                          <img  src="{{ item.src }} "><div class="config_slide_info"><h1>{{ item.title }}</h1><p class="config_description">{{ item.description }}</p><p class="config_url hidden">{{ item.src }}</p>
+                          </div>
+                        </div>
+                  {% endfor %}
+                  <div class="edit_slide_content">
+                    <p>
+                      <label>Url</label><br>
+                      <input type="text" id="slide_url" readonly>
+                    </p>
+                    <p>
+                      <label>Slide Title</label><br>
+                      <input type="text" id="slide_title">
+                    </p>
+                    <p>
+                      <label>Slide Description</label><br>
+                      <textarea id="slide_description"></textarea>
+                    </p>
+                    <p>
+                      <input type="submit" name="submit" class="button button-primary apply_slide_content" value="Apply" />
+                    </p>
+                  </div>
+               </div>
+          {% endif %}
         <div id="config_slides" style="width: 100%; float: left;">
 
         </div>
@@ -27,26 +59,11 @@
         
         <input type="submit" name="submit" class="button button-primary" value="Save changes" />
     </form>
-    <div class="edit_slide_content">
-    <p>
-        <label>Url</label><br>
-        <input type="text" id="slide_url" readonly>
-      </p>
-      <p>
-        <label>Slide Title</label><br>
-        <input type="text" id="slide_title">
-      </p>
-      <p>
-        <label>Slide Description</label><br>
-        <textarea id="slide_description"></textarea>
-      </p>
-      <p>
-        <input type="submit" name="submit" class="button button-primary apply_slide_content" value="Apply" />
-      </p>
-    </div>
+    
 </div>
 <script type="text/javascript">
 jQuery(document).ready(function($){
+  getImages();
 
   /**
   **  call sortable for each elements. (need jquery-ui)
@@ -105,14 +122,14 @@ jQuery('#insert-media-button').click(function() {
     jQuery(this).toggleClass("selected").siblings().removeClass("selected");
     
     if( jQuery(this).hasClass("selected")){
-      jQuery('.edit_slide_content').show();
+      jQuery('.edit_slide_content').show(500);
       //alert($(".config_slide_element.selected> img").attr('src'));
       jQuery("#slide_url").val( $(".config_slide_element.selected > img").attr('src'));
       jQuery("#slide_title").val( jQuery(this).find(".config_slide_info > h1").html());
       jQuery("#slide_description").val( jQuery(this).find(".config_slide_info > .config_description").html());
 
     }else{
-      jQuery('.edit_slide_content').hide();
+      jQuery('.edit_slide_content').hide(500);
       jQuery("#slide_title").val("");
       jQuery("#slide_description").val("");
     }
@@ -123,7 +140,7 @@ jQuery('#insert-media-button').click(function() {
  /**
   ** select image to edit slide information
   **/
- jQuery(".edit_slide_content .apply_slide_content ").on("click", function(){
+  jQuery(".edit_slide_content .apply_slide_content ").on("click", function(){
  
   jQuery("#config_slides .selected .config_slide_info > h1").html(jQuery("#slide_title").val());
   jQuery("#config_slides .selected .config_slide_info > .config_description").html(jQuery("#slide_description").val());
@@ -132,7 +149,7 @@ jQuery('#insert-media-button').click(function() {
 
 
   function getImages(){
-    images = [];
+     images = [];
     i = 0;
     $("#config_slides").find(".config_slide_element").each(function(){
       img = new Object();
@@ -144,7 +161,7 @@ jQuery('#insert-media-button').click(function() {
       images[i++] = img;
     })
     console.log(JSON.stringify(images));
-      jQuery("#input_image_links").val(JSON.stringify(images));
+     jQuery("#input_image_links").val(JSON.stringify(images));
   }
 });
 

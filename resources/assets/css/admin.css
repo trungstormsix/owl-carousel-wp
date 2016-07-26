@@ -50,13 +50,28 @@
 .config_slide_element .media-modal-close:hover .media-modal-icon::before{
 	color: #880000;
 }
-
+#config_slides{
+	position: relative;
+}
 .edit_slide_content{
+	color: #fff;
 	display: none;
 	right: 10px; 
-	position: fixed; 
-	top: calc(50%);
-	background: #f3f3f3 none repeat scroll 0 0;
+	position: absolute; 
+	top: 0;
+	background:rgba(12, 12, 12, 0.8) none repeat scroll 0 0;
 	z-index: 1001;
 	height: 100%;
+	width: auto;
+	padding:10px;
+	min-height: 290px;
 }
+.config_slide_element .config_slide_info h1{
+	font-size: 23px;
+    font-weight: 400;
+    line-height: 16px;
+    padding: 5px;
+}
+
+
+

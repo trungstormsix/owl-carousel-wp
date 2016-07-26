@@ -8,7 +8,8 @@ $panel->add([
     'slug'   => 'myplugin-index',
     'icon'   => 'dashicons-format-gallery',
     'uses'   => __NAMESPACE__ . '\Controllers\AdminController@index',
-    'post.add' => __NAMESPACE__ . '\Controllers\AdminController@add'
+    'post.add' => __NAMESPACE__ . '\Controllers\AdminController@add',
+    'delete' => __NAMESPACE__ . '\Controllers\AdminController@delete'
 ]);
 $panel->add([
     'type'   => 'sub-panel',

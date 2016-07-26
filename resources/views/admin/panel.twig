@@ -8,10 +8,10 @@
 		<thead>
 			<tr>
 				<td id="cb" class="manage-column column-cb check-column"></td>
-				<th>id</th>
-				<th>Name</th>
-				<th>Content</th>
-				<th>Image Url</th>
+				<th id="id" class="column-author">id</th>
+				<th id="name" class="column-tags">Name</th>
+				<th id="content" class="column-author">Content</th>
+				<th id="images_url">Image Url</th>
 			</tr>
 		</thead>
 		<tbody id="the-list">
@@ -20,9 +20,9 @@
 				<tr> 
 					<td></td>
 					<td>{{item.id}}</td>
-					<td><a href="{{ panel_url('oCoder::editSlide', {'id': item.id }) }}"> {{ item.name }}</a></td>
+					<td><a href="{{ panel_url('oCoder::editSlide', {'id': item.id }) }}"> {{ item.name }}</a><div class="row-actions"><span class="edit"><a href="{{ panel_url('oCoder::editSlide', {'id': item.id }) }}" aria-label="Edit “firsts carousel”">Edit</a> | </span><span class="inline hide-if-no-js"> | </span><span class="trash"><a href="{{ panel_url('oCoder::mainPanel', {'action':'delete', 'id': item.id}) }}" class="submitdelete" aria-label="Move “firsts carousel” to the Trash">Delete</a> | </span><span class="view"><a href="#" rel="permalink" aria-label="View “firsts carousel”">View</a></span></div></td>
 					<td> {{ item.content }}</td>
-					<td> {{ item.image_link }}</td>
+					<td id="colum_link" class="column-tags"> {{ item.image_link }}</td>
 				</tr>
 			{% else %}
 			<tr> 

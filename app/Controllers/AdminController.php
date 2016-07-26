@@ -52,18 +52,21 @@ class AdminController
         $id = $http->get("id");
          
         $slider = oCoder::find($id);
-        
- 			$objectJson=json_decode($slider->image_link);
- 			var_dump($objectJson);
- 			echo $slider->image_link;
- 			exit;
+        $arrItems=json_decode($slider->image_link);
+ 			
         return view('@oCoder/admin/edit_slideshow.twig', [
+        	'arrItems' => $arrItems,
             'slider'   => $slider,
             'content' => 'Congrats on your demo view.'
         ]);
     }
-	 
+	 function delete(Http $http,$id){
+	 	$id = $http->get("id");
+	 	$slider = oCoder::find($id);
+	 	$slider->delete();
 
+	 	return redirect_response(panel_url('oCoder::mainPanel'));
+}
 
 	function configure(){
  		return view('@oCoder/admin/configure.twig',[
