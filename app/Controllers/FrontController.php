@@ -7,6 +7,8 @@ use Herbert\Framework\Exceptions\HttpErrorException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Herbert\Framework\Models\Post;
 use oCoder\Helper;
+use oCoder\Models\oCoder;
+
 /**
  * Class FrontController.
  */
@@ -29,8 +31,7 @@ class FrontController
      */
     public function getCarousel($id, Http $http)
     {
-        
-        $post = Post::find($id);
+          
 
         if(!$post)
         {
@@ -53,10 +54,12 @@ class FrontController
     * for API call
     **/
     public function getContentForAPI($id){
-          return view('@oCoder/site/api.twig', [
-            'title'   => 'My Demo '.$id,
-            'assetUrl'=>  Helper::assetUrl(),
-            'content' => 'Congrats api demo view.'
+        $slider = oCoder::find($id);
+        $images=json_decode($slider->image_link);
+        return view('@oCoder/site/api.twig', [
+        'assetUrl'=>  Helper::assetUrl(),
+        'slider'   => $slider,
+        'images'   => $images
         ]);
     }
 }

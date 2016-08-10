@@ -1,33 +1,41 @@
 <div class="wrap">
     <h2>Customs Slider</h2>
-    <form id="form1" method="post" action="{{ panel_url('oCoder::mainPanel', {'action':'add'}) }}">
+    {% if slider.id %}
+      
+      <h4>Short Code:  <span class="click_copy">[oCoder-owl-carousel cat_id={{slider.id}}]</span></h4>
+    {% endif %}
+    <form id="editSlide" method="post" action="{{ panel_url('oCoder::mainPanel', {'action':'add'}) }}">
         <input type="hidden" name="id" value="{{slider ? slider.id : ''}}">
-
-        <label>Name </label><br/>
-        <input type="text" name="name" value="{{slider ? slider.name : ''}}">
-        <br/>
-
-        <label>Content Text </label><br/>
-        <input type="text" name="content" value="{{slider ? slider.content : ''}}"><br/>
-
-        <label>Company</label><br/>
-        <input type="text" name="company"><br/>
+        <div class="field_wrapper">
+          <label>Name (*)</label><br/>
+          <input type="text" name="name" require value="{{slider ? slider.name : ''}}">
+       </div>
+        <div class="field_wrapper">
+          <label>Content Text </label><br/>
+          <input type="text" name="content" value="{{slider ? slider.content : ''}}"><br/>
+        </div>
+        {# <label>Company</label><br/>
+        <input type="text" name="company"><br/> #}
          
-        <label>Image</label> 
+        <label>Images</label> 
        
           {% if arrItems %}
-          <p><i>* Click Images to edit</i></p>
+          <p><i>* Click Image to edit</i></p>
                <div id="config_slides" style="width: 100%; float: left;">
                   {% for item in arrItems %}
                       <div class='config_slide_element'>
                           <button class="button-link media-modal-close" type="button"><span class="media-modal-icon">
                               <span class="screen-reader-text">Close media panel</span></span>
                         </button>
-                          <img  src="{{ item.src }} "><div class="config_slide_info"><h1>{{ item.title }}</h1><p class="config_description">{{ item.description }}</p><p class="config_url hidden">{{ item.src }}</p>
+                          <img  src="{{ item.src }} "><div class="config_slide_info"><h1>{{ item.title }}</h1><p class="config_description">{{ item.description }}</p>
+                          <p class="config_info">{{ item.info }}</p>
+                          <p class="config_url hidden">{{ item.src }}</p>
                           </div>
                         </div>
                   {% endfor %}
-                  <div class="edit_slide_content">
+                  
+          {% endif %}
+          <div class="edit_slide_content">
                     <p>
                       <label>Url</label><br>
                       <input type="text" id="slide_url" readonly>
@@ -41,11 +49,14 @@
                       <textarea id="slide_description"></textarea>
                     </p>
                     <p>
+                      <label>Info</label><br>
+                      <textarea id="slide_info"></textarea>
+                    </p>
+                    <p>
                       <input type="submit" name="submit" class="button button-primary apply_slide_content" value="Apply" />
                     </p>
                   </div>
                </div>
-          {% endif %}
         <div id="config_slides" style="width: 100%; float: left;">
 
         </div>
@@ -61,108 +72,3 @@
     </form>
     
 </div>
-<script type="text/javascript">
-jQuery(document).ready(function($){
-  getImages();
-
-  /**
-  **  call sortable for each elements. (need jquery-ui)
-  **/
-  $('#config_slides').sortable({
-        items: '.config_slide_element',
-        update: function( event, ui ) { getImages();}
-    });
-/***
-**   call open media of default wordpress
-**/
- var tgm_media_frame;
-
-jQuery('#insert-media-button').click(function() {
-
-  if ( tgm_media_frame ) {
-    tgm_media_frame.open();
-    return;
-  }
-
-  tgm_media_frame = wp.media.frames.tgm_media_frame = wp.media({
-    multiple: true,
-    library: {
-      type: 'image'
-    },
-  });
-
-  tgm_media_frame.on('select', function(){
-    var selection = tgm_media_frame.state().get('selection');
-    selection.map( function( attachment ) {
-      attachment = attachment.toJSON();
-          console.log(attachment);
-          //add slide to slides
-           $("#config_slides").append("<div class='config_slide_element'>"+'<button class="button-link media-modal-close" type="button"><span class="media-modal-icon"><span class="screen-reader-text">Close media panel</span></span></button>'+"<img  src='" +attachment.url+"'><div class='config_slide_info'><h1>"+attachment.title+"</h1><p class='config_description'>" +attachment.description+"</p'><p class='config_url hidden'>"+attachment.url+"</p></div></div>");
-
-            
-    });
-
-    getImages();
-  });
-
-
-  tgm_media_frame.open();
-
-});
-  /**
-  **  remove image from slides
-  **/
-  jQuery("#config_slides").on("click", ".media-modal-close", function(){
-      jQuery(this).closest(".config_slide_element").remove();
-  })
-  /**
-  ** select image to edit slide information
-  **/
- jQuery("#config_slides").on("click", ".config_slide_element", function(){
-    jQuery(this).toggleClass("selected").siblings().removeClass("selected");
-    
-    if( jQuery(this).hasClass("selected")){
-      jQuery('.edit_slide_content').show(500);
-      //alert($(".config_slide_element.selected> img").attr('src'));
-      jQuery("#slide_url").val( $(".config_slide_element.selected > img").attr('src'));
-      jQuery("#slide_title").val( jQuery(this).find(".config_slide_info > h1").html());
-      jQuery("#slide_description").val( jQuery(this).find(".config_slide_info > .config_description").html());
-
-    }else{
-      jQuery('.edit_slide_content').hide(500);
-      jQuery("#slide_title").val("");
-      jQuery("#slide_description").val("");
-    }
-
-
-})
-
- /**
-  ** select image to edit slide information
-  **/
-  jQuery(".edit_slide_content .apply_slide_content ").on("click", function(){
- 
-  jQuery("#config_slides .selected .config_slide_info > h1").html(jQuery("#slide_title").val());
-  jQuery("#config_slides .selected .config_slide_info > .config_description").html(jQuery("#slide_description").val());
-   getImages();
- });
-
-
-  function getImages(){
-     images = [];
-    i = 0;
-    $("#config_slides").find(".config_slide_element").each(function(){
-      img = new Object();
-
-      img.title = $(this).find('.config_slide_info h1').html();
-      img.description = $(this).find('.config_slide_info .config_description').html();
-      img.src =  $(this).find('.config_slide_info .config_url').html();
-      
-      images[i++] = img;
-    })
-    console.log(JSON.stringify(images));
-     jQuery("#input_image_links").val(JSON.stringify(images));
-  }
-});
-
-</script>
