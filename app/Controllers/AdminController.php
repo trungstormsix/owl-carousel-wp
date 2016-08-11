@@ -57,7 +57,7 @@ class AdminController
         return view('@oCoder/admin/edit_slideshow.twig', [
         	'arrItems' => $arrItems,
             'slider'   => $slider,
-            'content' => 'Congrats on your demo view.'
+            'get_site_url' => get_site_url()
         ]);
     }
 	 function delete(Http $http,$id){

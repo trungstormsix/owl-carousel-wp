@@ -36,6 +36,7 @@
                   
           {% endif %}
           <div class="edit_slide_content">
+            <h4 class="dashicons-before dashicons-edit"> Edit Slide</h4>
                     <p>
                       <label>Url</label><br>
                       <input type="text" id="slide_url" readonly>
@@ -67,8 +68,29 @@
         </button>
         </p>
         <br/>
-        
+       <div>
+          <div id="preview">
+          </div>
+
+
+        </div>
+        <br>
         <input type="submit" name="submit" class="button button-primary" value="Save changes" />
+        <a id="btn_preview" class="button button-primary dashicons-before dashicons-visibility"> Live Preview</a>
     </form>
     
 </div>
+
+<script type="text/javascript">
+var isPreview = false;
+jQuery("#btn_preview").on("click", function(e){
+  e.preventDefault();
+  isPreview = true;
+ preview();
+})
+function preview(){
+  jQuery( "#preview" ).html('Loading ...');
+  jQuery( "#preview" ).load( "{{ get_site_url }}/carousel/1",{images: images, name: jQuery("#editSlide input[name=name]").val()} ,function() {
+ });
+}
+</script>

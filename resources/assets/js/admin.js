@@ -7,7 +7,7 @@ jQuery(document).ready(function($) {
     /**
      **  call sortable for each elements. (need jquery-ui)
      **/
-    $('#config_slides').sortable({
+    jQuery('#config_slides').sortable({
         items: '.config_slide_element',
         update: function(event, ui) {
             getImages();
@@ -34,7 +34,7 @@ jQuery(document).ready(function($) {
                 attachment = attachment.toJSON();
                 console.log(attachment);
                 //add slide to slides
-                $("#config_slides").append("<div class='config_slide_element'>" + '<button class="button-link media-modal-close" type="button"><span class="media-modal-icon"><span class="screen-reader-text">Close media panel</span></span></button>' + "<img  src='" + attachment.url + "'><div class='config_slide_info'><h1>" + attachment.title + "</h1><p class='config_description'>" + attachment.description + "</p'><p class='config_url hidden'>" + attachment.url + "</p></div></div>");
+                jQuery("#config_slides").append("<div class='config_slide_element'>" + '<button class="button-link media-modal-close" type="button"><span class="media-modal-icon"><span class="screen-reader-text">Close media panel</span></span></button>' + "<img  src='" + attachment.url + "'><div class='config_slide_info'><h1>" + attachment.title + "</h1><p class='config_description'>" + attachment.description + "</p'><p class='config_url hidden'>" + attachment.url + "</p></div></div>");
             });
             getImages();
         });
@@ -53,8 +53,8 @@ jQuery(document).ready(function($) {
             jQuery(this).toggleClass("selected").siblings().removeClass("selected");
             if (jQuery(this).hasClass("selected")) {
                 jQuery('.edit_slide_content').show(500);
-                //alert($(".config_slide_element.selected> img").attr('src'));
-                jQuery("#slide_url").val($(".config_slide_element.selected > img").attr('src'));
+                //alert(jQuery(".config_slide_element.selected> img").attr('src'));
+                jQuery("#slide_url").val(jQuery(".config_slide_element.selected > img").attr('src'));
                 jQuery("#slide_title").val(jQuery(this).find(".config_slide_info > h1").html());
                 jQuery("#slide_description").val(jQuery(this).find(".config_slide_info > .config_description").html());
                 jQuery("#slide_info").val(jQuery(this).find(".config_slide_info > .config_info").html());
@@ -68,22 +68,30 @@ jQuery(document).ready(function($) {
         /**
          ** select image to edit slide information
          **/
-    jQuery(".edit_slide_content .apply_slide_content ").on("click", function() {
+    jQuery(".edit_slide_content .apply_slide_content ").on("click", function(e) {
         jQuery("#config_slides .selected .config_slide_info > h1").html(jQuery("#slide_title").val());
         jQuery("#config_slides .selected .config_slide_info > .config_description").html(jQuery("#slide_description").val());
         jQuery("#config_slides .selected .config_slide_info > .config_info").html(jQuery("#slide_info").val());
         getImages();
+        if(isPreview){
+            preview();
+            jQuery('.edit_slide_content').hide(500);
+            jQuery('.config_slide_element.selected').removeClass('selected');
+        }
+
+        e.preventDefault();
+        return;
     });
 
     function getImages() {
         images = [];
         i = 0;
-        $("#config_slides").find(".config_slide_element").each(function() {
+        jQuery("#config_slides").find(".config_slide_element").each(function() {
             img = new Object();
-            img.title = $(this).find('.config_slide_info h1').html();
-            img.description = $(this).find('.config_slide_info .config_description').html();
-            img.info = $(this).find('.config_slide_info .config_info').html();
-            img.src = $(this).find('.config_slide_info .config_url').html();
+            img.title = jQuery(this).find('.config_slide_info h1').html();
+            img.description = jQuery(this).find('.config_slide_info .config_description').html();
+            img.info = jQuery(this).find('.config_slide_info .config_info').html();
+            img.src = jQuery(this).find('.config_slide_info .config_url').html();
             images[i++] = img;
         })
         console.log(JSON.stringify(images));
@@ -95,11 +103,11 @@ jQuery(document).ready(function($) {
      ** 
      ***/
     jQuery("#editSlide").submit(function(event) {
-        var name = $(this).find("input[name=name]")
+        var name = jQuery(this).find("input[name=name]")
         if (!name.val()) {
             name.addClass("error");
-            $('html, body').animate({
-                scrollTop: $("#editSlide").offset().top
+            jQuery('html, body').animate({
+                scrollTop: jQuery("#editSlide").offset().top
             }, 200);
             event.preventDefault();
         }
@@ -109,6 +117,13 @@ jQuery(document).ready(function($) {
         jQuery(this).removeClass("error");
       }
     })
+    jQuery("#editSlide input[name=name]").on("change", function(){
+
+     if(isPreview){
+            preview();
+        }
+    });
+
     //copy shortcode
     jQuery(".click_copy").on("click", function(){
         copyToClipboard(this);

@@ -31,25 +31,34 @@ class FrontController
      */
     public function getCarousel($id, Http $http)
     {
-          
-
-        if(!$post)
+       if($http->has('images'))
         {
-            return response('Post not found', 404);
+            $images = ($http->get("images"));
+            var_dump($images);
+            exit;
         }
 
-        if($http->has('json'))
-        {
-            return json_response($post);
-        }
-        // var_dump($post);
-        return view('@oCoder/site/example.twig', [
-		    'title'   => 'My Demo '.$id.' '.$post->post_title,
-		    'content' => 'Congrats on your demo view.'
-		]);
+        $slider = oCoder::find($id);
+        $images=json_decode($slider->image_link);
+        return  $this->_loadTestimonial($slider, $images);
     }
 
+    public function preview($id, Http $http)
+    {
+       if($http->has('images'))
+        {
+            $slider = oCoder::find($id);
+            $slider->name = $http->get("name");
+            $images = ($http->get("images"));
+             
+        }else{
+            $slider = oCoder::find($id);
+            $images=json_decode($slider->image_link);
+        }
 
+        
+       return $this->_loadTestimonial($slider, $images);
+    }
     /**
     * for API call
     **/
@@ -60,6 +69,15 @@ class FrontController
         'assetUrl'=>  Helper::assetUrl(),
         'slider'   => $slider,
         'images'   => $images
+        ]);
+    }
+
+    private function _loadTestimonial($slider, $images){
+        return view('@oCoder/site/example.twig', [
+            'slider'   => $slider,
+            'images'   => $images,
+            'frontJS'  => Helper::assetUrl('/js/responsive_testemonial_carousel.js'),
+            'css' => Helper::assetUrl('/css/responsive_testemonial_carousel.css')
         ]);
     }
 }

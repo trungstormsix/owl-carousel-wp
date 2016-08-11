@@ -14,10 +14,14 @@ $router->get([
 $router->get([
     'as'   => 'carouselWithParam',
     'uri'  => '/carousel/{id}',
-    'uses' => function($id)
-    {
-        return "Carousel Id: {$id}";
-    }
+    'uses' => __NAMESPACE__ . '\Controllers\FrontController@getCarousel'
+
+]);
+$router->post([
+    'as'   => 'carouselWithParam',
+    'uri'  => '/carousel/{id}',
+    'uses' => __NAMESPACE__ . '\Controllers\FrontController@preview'
+
 ]);
 $router->get([
     'as'   => 'carousel_url',
