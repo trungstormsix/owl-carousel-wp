@@ -1,96 +1,105 @@
 <div class="wrap">
     <h2>Customs Slider</h2>
-    {% if slider.id %}
-      
-      <h4>Short Code:  <span class="click_copy">[oCoder-owl-carousel cat_id={{slider.id}}]</span></h4>
-    {% endif %}
+   
     <form id="editSlide" method="post" action="{{ panel_url('oCoder::mainPanel', {'action':'add'}) }}">
         <input type="hidden" name="id" value="{{slider ? slider.id : ''}}">
         <div class="field_wrapper">
-          <label>Name (*)</label><br/>
-          <input type="text" name="name" require value="{{slider ? slider.name : ''}}">
-       </div>
-        <div class="field_wrapper">
-          <label>Content Text </label><br/>
-          <input type="text" name="content" value="{{slider ? slider.content : ''}}"><br/>
+            <label>Title (*)</label><br/>
+            <input type="text" name="name" require value="{{slider ? slider.name : ''}}">
         </div>
-        {# <label>Company</label><br/>
-        <input type="text" name="company"><br/> #}
-         
+        <div class="field_wrapper">
+            <label>Content Text </label><br/>
+            <input type="text" name="content" value="{{slider ? slider.content : ''}}"><br/>
+            {{content|raw}}
+        </div>
+
         <label>Images</label> 
-       
-          {% if arrItems %}
-          <p><i>* Click Image to edit</i></p>
-               <div id="config_slides" style="width: 100%; float: left;">
-                  {% for item in arrItems %}
-                      <div class='config_slide_element'>
-                          <button class="button-link media-modal-close" type="button"><span class="media-modal-icon">
-                              <span class="screen-reader-text">Close media panel</span></span>
+
+        {% if arrItems %}
+            <p><i>* Click Image to edit</i></p>
+            <div id="config_slides" style="width: 100%; float: left;">
+                {% for item in arrItems %}
+                    <div class='config_slide_element'>
+                        <button class="button-link media-modal-close" type="button"><span class="media-modal-icon">
+                                <span class="screen-reader-text">Close media panel</span></span>
                         </button>
-                          <img  src="{{ item.src }} "><div class="config_slide_info"><h1>{{ item.title }}</h1><p class="config_description">{{ item.description }}</p>
-                          <p class="config_info">{{ item.info }}</p>
-                          <p class="config_url hidden">{{ item.src }}</p>
-                          </div>
+                        <img  src="{{ item.src }} "><div class="config_slide_info"><h1>{{ item.title }}</h1><p class="config_description">{{ item.description }}</p>
+                            <p class="config_info">{{ item.info }}</p>
+                            <p class="config_url hidden">{{ item.src }}</p>
                         </div>
-                  {% endfor %}
-                  
-          {% endif %}
-          <div class="edit_slide_content">
+                    </div>
+                {% endfor %}
+
+            {% endif %}
+
+        </div>
+        <div class="edit_slide_content">
             <h4 class="dashicons-before dashicons-edit"> Edit Slide</h4>
-                    <p>
-                      <label>Url</label><br>
-                      <input type="text" id="slide_url" readonly>
-                    </p>
-                    <p>
-                      <label>Slide Title</label><br>
-                      <input type="text" id="slide_title">
-                    </p>
-                    <p>
-                      <label>Slide Description</label><br>
-                      <textarea id="slide_description"></textarea>
-                    </p>
-                    <p>
-                      <label>Info</label><br>
-                      <textarea id="slide_info"></textarea>
-                    </p>
-                    <p>
-                      <input type="submit" name="submit" class="button button-primary apply_slide_content" value="Apply" />
-                    </p>
-                  </div>
-               </div>
+            <p>
+                <label>Url</label><br>
+                <input type="text" id="slide_url" readonly>
+            </p>
+            <p>
+                <label>Slide Title</label><br>
+                <input type="text" id="slide_title">
+            </p>
+            <p>
+                <label>Slide Description</label><br>
+                <textarea id="slide_description"></textarea>
+            </p>
+            <p>
+                <label>Info</label><br>
+                <textarea id="slide_info"></textarea>
+            </p>
+            <p>
+                <input type="submit" name="submit" class="button button-primary apply_slide_content" value="Apply" />
+            </p>
+        </div>
         <div id="config_slides" style="width: 100%; float: left;">
 
         </div>
         <p>
-        <input type="hidden" id="input_image_links" name="image_link" id="image_link" />
-        <button type="button"   id="insert-media-button"  >
-          <span class="wp-media-buttons-icon"></span> Add image 
-        </button>
+            <input type="hidden" id="input_image_links" name="image_link" id="image_link" />
+            <button type="button"   id="insert-media-button"  >
+                <span class="wp-media-buttons-icon"></span> Add image 
+            </button>
         </p>
+        
         <br/>
-       <div>
-          <div id="preview">
-          </div>
-
-
+        <div>
+            <div id="preview">
+            </div>
         </div>
+        
         <br>
         <input type="submit" name="submit" class="button button-primary" value="Save changes" />
         <a id="btn_preview" class="button button-primary dashicons-before dashicons-visibility"> Live Preview</a>
+        {% if slider.id %}
+            <h4>Short Code:<i>(click to copy)</i>  <b style="font-size: 1.3em"><span class="click_copy">[oCoder-owl-carousel cat_id={{slider.id}}]</span></b></h4>
+        {% endif %}
     </form>
-    
+
 </div>
 
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,700,800' rel='stylesheet' type='text/css'>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+		<link href="{{ css }}"  rel='stylesheet' type='text/css'>
+		<script src="{{ frontJS }}"></script>
+  
 <script type="text/javascript">
-var isPreview = false;
-jQuery("#btn_preview").on("click", function(e){
-  e.preventDefault();
-  isPreview = true;
- preview();
-})
-function preview(){
-  jQuery( "#preview" ).html('Loading ...');
-  jQuery( "#preview" ).load( "{{ get_site_url }}/carousel/1",{images: images, name: jQuery("#editSlide input[name=name]").val()} ,function() {
- });
-}
+    var isPreview = false;
+    jQuery("#btn_preview").on("click", function (e) {
+        e.preventDefault();
+        isPreview = true;
+        preview();
+    })
+    function preview() {
+        jQuery("#preview").html('Loading ...');
+        jQuery("#preview").load("{{ get_site_url }}/carousel-preview/1", {
+            images: images,
+            name: jQuery("#editSlide input[name=name]").val(),
+            content: jQuery("#editSlide input[name=content]").val()
+        }, function () {
+        });
+    }
 </script>

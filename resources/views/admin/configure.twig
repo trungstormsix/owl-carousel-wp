@@ -12,116 +12,118 @@
 
         <label>Company</label><br/>
         <input type="text" name="company"><br/>
-         <label>Link</label><br/>
+        <label>Link</label><br/>
         <input type="text" name="image_link" id="image_link" value="1233444">
         <label>Image</label> 
         <div id="config_slides" style="width: 100%; float: left;">
 
         </div>
         <p>
-        
-        <button type="button"   id="insert-media-button"  >
-          <span class="wp-media-buttons-icon"></span> Add image 
-        </button>
+
+            <button type="button"   id="insert-media-button"  >
+                <span class="wp-media-buttons-icon"></span> Add image 
+            </button>
         </p>
         <br/>
-        
+
         <input type="submit" name="submit" class="button button-primary" value="Save changes" />
     </form>
     <div class="edit_slide_content">
-      <p>
-        <label>Slide Title</label><br>
-        <input type="text" id="slide_title">
-      </p>
-      <p>
-        <label>Slide Description</label><br>
-        <textarea id="slide_description"></textarea>
-      </p>
-      <p>
-        <input type="submit" name="submit" class="button button-primary apply_slide_content" value="Apply" />
-      </p>
+        <p>
+            <label>Slide Title</label><br>
+            <input type="text" id="slide_title">
+        </p>
+        <p>
+            <label>Slide Description</label><br>
+            <textarea id="slide_description"></textarea>
+        </p>
+        <p>
+            <input type="submit" name="submit" class="button button-primary apply_slide_content" value="Apply" />
+        </p>
     </div>
 </div>
 <script type="text/javascript">
-jQuery(document).ready(function($){
-  /**
-  **  call sortable for each elements. (need jquery-ui)
-  **/
-  $('#config_slides').sortable({
-        items: '.config_slide_element'
+    jQuery(document).ready(function ($) {
+        /**
+         **  call sortable for each elements. (need jquery-ui)
+         **/
+        $('#config_slides').sortable({
+            items: '.config_slide_element'
+        });
+        /***
+         **   call open media of default wordpress
+         **/
+        var tgm_media_frame;
+
+        jQuery('#insert-media-button').click(function () {
+
+            if (tgm_media_frame) {
+                tgm_media_frame.open();
+                return;
+            }
+
+            tgm_media_frame = wp.media.frames.tgm_media_frame = wp.media({
+                multiple: true,
+                library: {
+                    type: 'image'
+                },
+            });
+
+            tgm_media_frame.on('select', function () {
+                var selection = tgm_media_frame.state().get('selection');
+                selection.map(function (attachment) {
+
+                    $("#image_link").attr("value", attachment.url);
+
+                    console.log(attachment.url);
+                    attachment = attachment.toJSON();
+
+                    //add slide to slides
+                    $("#config_slides").append("<div class='config_slide_element'>" + '<button class="button-link media-modal-close" type="button"><span class="media-modal-icon"><span class="screen-reader-text">Close media panel</span></span></button>' + "<img  src='" + attachment.url + "'><div class='config_slide_info'><h1>" + attachment.title + "</h1><p class='config_description'>" + attachment.description + "</p></div></div>");
+
+                    console.log(attachment);
+                });
+            });
+
+            tgm_media_frame.open();
+
+        });
+        /**
+         **  remove image from slides
+         **/
+        jQuery("#config_slides").on("click", ".media-modal-close", function () {
+            jQuery(this).closest(".config_slide_element").remove();
+            $("#image_link").attr('value', "");
+            jQuery('.edit_slide_content').hide();
+
+        })
+        /**
+         ** select image to edit slide information
+         **/
+        jQuery("#config_slides").on("click", ".config_slide_element", function () {
+            jQuery(this).toggleClass("selected").siblings().removeClass("selected");
+
+            if (jQuery(this).hasClass("selected")) {
+                jQuery('.edit_slide_content').show();
+                jQuery("#slide_title").val(jQuery(this).find(".config_slide_info > h1").html());
+                jQuery("#slide_description").val(jQuery(this).find(".config_slide_info > .config_description").html());
+                jQuery("#slide_link").val(jQuery(this).find(".config_slide_info > .config_description").html());
+            } else {
+                jQuery('.edit_slide_content').hide();
+                jQuery("#slide_title").val("");
+                jQuery("#slide_description").val("");
+            }
+        })
+
+        /**
+         ** select image to edit slide information
+         **/
+        jQuery(".edit_slide_content .apply_slide_content ").on("click", function () {
+            jQuery("#config_slides .selected .config_slide_info > h1").html(jQuery("#slide_title").val());
+            jQuery("#config_slides .selected .config_slide_info > .config_description").html(jQuery("#slide_description").val());
+        });
+
+
     });
-/***
-**   call open media of default wordpress
-**/
- var tgm_media_frame;
-
-jQuery('#insert-media-button').click(function() {
-
-  if ( tgm_media_frame ) {
-    tgm_media_frame.open();
-    return;
-  }
-
-  tgm_media_frame = wp.media.frames.tgm_media_frame = wp.media({
-    multiple: true,
-    library: {
-      type: 'image'
-    },
-  });
-
-  tgm_media_frame.on('select', function(){
-    var selection = tgm_media_frame.state().get('selection');
-    selection.map( function( attachment ) {
-
-     $("#image_link").attr("value",attachment.url);
-
-           console.log(attachment.url);
-      attachment = attachment.toJSON();
-          
-          //add slide to slides
-           $("#config_slides").append("<div class='config_slide_element'>"+'<button class="button-link media-modal-close" type="button"><span class="media-modal-icon"><span class="screen-reader-text">Close media panel</span></span></button>'+"<img  src='" +attachment.url+"'><div class='config_slide_info'><h1>"+attachment.title+"</h1><p class='config_description'>" +attachment.description+"</p></div></div>");
-           
-           console.log(attachment);
-    });
-  });
-
-  tgm_media_frame.open();
-
-});
-  /**
-  **  remove image from slides
-  **/
-  jQuery("#config_slides").on("click", ".media-modal-close", function(){
-      jQuery(this).closest(".config_slide_element").remove();
-       $("#image_link").attr('value',"");
-  })
-  /**
-  ** select image to edit slide information
-  **/
- jQuery("#config_slides").on("click", ".config_slide_element", function(){
-    jQuery(this).toggleClass("selected").siblings().removeClass("selected");
-    
-    if( jQuery(this).hasClass("selected")){
-      jQuery('.edit_slide_content').show();
-      jQuery("#slide_title").val( jQuery(this).find(".config_slide_info > h1").html());
-      jQuery("#slide_description").val( jQuery(this).find(".config_slide_info > .config_description").html());
-      jQuery("#slide_link").val( jQuery(this).find(".config_slide_info > .config_description").html());
-    }else{
-      jQuery('.edit_slide_content').hide();
-      jQuery("#slide_title").val("");
-      jQuery("#slide_description").val("");
-    }
-})
-
- /**
-  ** select image to edit slide information
-  **/
- jQuery(".edit_slide_content .apply_slide_content ").on("click", function(){
-  jQuery("#config_slides .selected .config_slide_info > h1").html(jQuery("#slide_title").val());
-  jQuery("#config_slides .selected .config_slide_info > .config_description").html(jQuery("#slide_description").val());
- });
-
-
-});
 
 </script>

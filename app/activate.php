@@ -16,11 +16,13 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 //     $table->increments('id');
 //     $table->string('title');
 // });
-Capsule::schema()->create('ocoder_demo', function($table)
+Capsule::schema()->dropIfExists('owl_carousel_ocoder');
+Capsule::schema()->create('owl_carousel_ocoder', function($table)
 {
     $table->increments('id');
     $table->string('name');
     $table->string('content');
-    $table->string('company');
     $table->text('image_link');
 });
+
+ 

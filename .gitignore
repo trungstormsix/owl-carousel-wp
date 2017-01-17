@@ -64,3 +64,5 @@ composer.lock
 
 .idea/encodings.xml
 .workspace
+/nbproject/private/
+nbproject/

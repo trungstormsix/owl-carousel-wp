@@ -8,10 +8,10 @@
 		<script src="{{ frontJS }}"></script>
      </head>
     <body>
-            
-        <h1>{{ slider.name }}</h1>
-         	<!-- start of slider add on -->
-	 <div class="uc_quote_slider">
+        <h2>{{ slider.name }}</h2>
+        <div>{{ slider.content|raw }}</div>
+        <!-- start of slider add on -->
+        <div class="uc_quote_slider">
 
 	 {% for item in images %}
          

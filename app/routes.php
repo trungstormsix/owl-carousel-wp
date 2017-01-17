@@ -19,7 +19,7 @@ $router->get([
 ]);
 $router->post([
     'as'   => 'carouselWithParam',
-    'uri'  => '/carousel/{id}',
+    'uri'  => '/carousel-preview/{id}',
     'uses' => __NAMESPACE__ . '\Controllers\FrontController@preview'
 
 ]);

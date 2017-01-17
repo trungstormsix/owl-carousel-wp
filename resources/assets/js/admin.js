@@ -32,7 +32,7 @@ jQuery(document).ready(function($) {
             var selection = tgm_media_frame.state().get('selection');
             selection.map(function(attachment) {
                 attachment = attachment.toJSON();
-                console.log(attachment);
+//                console.log(attachment);
                 //add slide to slides
                 jQuery("#config_slides").append("<div class='config_slide_element'>" + '<button class="button-link media-modal-close" type="button"><span class="media-modal-icon"><span class="screen-reader-text">Close media panel</span></span></button>' + "<img  src='" + attachment.url + "'><div class='config_slide_info'><h1>" + attachment.title + "</h1><p class='config_description'>" + attachment.description + "</p'><p class='config_url hidden'>" + attachment.url + "</p></div></div>");
             });
@@ -43,13 +43,16 @@ jQuery(document).ready(function($) {
     /**
      **  remove image from slides
      **/
-    jQuery("#config_slides").on("click", ".media-modal-close", function() {
+    jQuery("#config_slides").on("click", ".media-modal-close", function(e) {      
             jQuery(this).closest(".config_slide_element").remove();
+            jQuery('.edit_slide_content').hide(500);
+            if(isPreview){  getImages(); preview(); }
         })
         /**
          ** select image to edit slide information
          **/
-    jQuery("#config_slides").on("click", ".config_slide_element", function() {
+    jQuery("#config_slides").on("click", ".config_slide_element", function(e) {
+        if(jQuery(e.target).hasClass('media-modal-close')) return;
             jQuery(this).toggleClass("selected").siblings().removeClass("selected");
             if (jQuery(this).hasClass("selected")) {
                 jQuery('.edit_slide_content').show(500);
@@ -94,8 +97,7 @@ jQuery(document).ready(function($) {
             img.src = jQuery(this).find('.config_slide_info .config_url').html();
             images[i++] = img;
         })
-        console.log(JSON.stringify(images));
-        jQuery("#input_image_links").val(JSON.stringify(images));
+         jQuery("#input_image_links").val(JSON.stringify(images));
     }
     /***
      **
@@ -117,7 +119,7 @@ jQuery(document).ready(function($) {
         jQuery(this).removeClass("error");
       }
     })
-    jQuery("#editSlide input[name=name]").on("change", function(){
+    jQuery("#editSlide input[name=name],#editSlide input[name=content]").on("change", function(){
 
      if(isPreview){
             preview();

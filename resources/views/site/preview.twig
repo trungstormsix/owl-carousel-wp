@@ -1,0 +1,57 @@
+<h1> Preview</h1>            
+<h2>{{ slider.name }}</h2>
+<div>{{ slider.content|raw }}</div>
+<!-- start of slider add on -->
+<div class="uc_quote_slider">
+
+    {% for item in images %}
+
+        <!-- start of block item -->
+        <div class="uc_quote_item">
+            <div class="uc_quote_info">
+                <p>{{ item.description }}</p>
+                <div class="uc_author">
+                    <img class="uc_author_avatar" src="{{ item.src }}" height="48" width="48" alt="" />
+                    <div class="uc_author_info">
+                        <div class="uc_name">{{ item.title }}</div>
+                        <div class="uc_company">@{{ item.info ? item.info : "company"}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end of block item -->
+    {% endfor %}
+
+</div>
+<!-- start of slider 1 add on -->
+
+<script>
+    // Initialize Carousel
+    jQuery('.uc_quote_slider').slick({
+        infinite: true,
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        arrows: false,
+        dots: true,
+        speed: 300,
+        responsive: [{
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1
+                }
+            }, {
+                breakpoint: 900,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1
+                }
+            }, {
+                breakpoint: 767,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }]
+    });
+</script>

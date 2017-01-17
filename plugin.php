@@ -2,12 +2,12 @@
 
 /**
  * @wordpress-plugin
- * Plugin Name:       owlCarousel
- * Plugin URI:        http://plugin-name.com/
- * Description:       A plugin.
+ * Plugin Name:       owl Carousel oCoder
+ * Plugin URI:        http://ocodereducation.com/
+ * Description:       owl Carousel for wordpress.
  * Version:           1.0.0
- * Author:            Author
- * Author URI:        http://author.com/
+ * Author:            oCoder Solutions
+ * Author URI:        http://ocodereducation.com/
  * License:           MIT
  */
 

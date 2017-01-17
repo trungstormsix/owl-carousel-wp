@@ -33,9 +33,7 @@ class FrontController
     {
        if($http->has('images'))
         {
-            $images = ($http->get("images"));
-            var_dump($images);
-            exit;
+            $images = ($http->get("images"));           
         }
 
         $slider = oCoder::find($id);
@@ -45,10 +43,11 @@ class FrontController
 
     public function preview($id, Http $http)
     {
-       if($http->has('images'))
+       if($http->has('images') || $http->get("name"))
         {
             $slider = oCoder::find($id);
             $slider->name = $http->get("name");
+            $slider->content = $http->get("content");
             $images = ($http->get("images"));
              
         }else{
@@ -57,10 +56,13 @@ class FrontController
         }
 
         
-       return $this->_loadTestimonial($slider, $images);
+       return view('@oCoder/site/preview.twig', [
+            'slider'   => $slider,
+            'images'   => $images            
+        ]);
     }
     /**
-    * for API call
+    * for API call (short code)
     **/
     public function getContentForAPI($id){
         $slider = oCoder::find($id);

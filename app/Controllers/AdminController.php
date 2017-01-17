@@ -6,6 +6,8 @@ use Herbert\Framework\Http;
 use Herbert\Framework\Exceptions\HttpErrorException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use oCoder\Models\oCoder;
+use oCoder\Helper;
+
 /**
  * Class AdminCotroller.
  */
@@ -36,7 +38,6 @@ class AdminController
  		}
  		$slide->name = $http->get('name');
 		$slide->content = $http->get('content');
-		$slide->company = $http->get('company');
 		$slide->image_link = $http->get('image_link');
 		$slide->save();
  		 
@@ -55,9 +56,11 @@ class AdminController
         $arrItems=json_decode($slider->image_link);
  			
         return view('@oCoder/admin/edit_slideshow.twig', [
-        	'arrItems' => $arrItems,
+            'arrItems' => $arrItems,
             'slider'   => $slider,
-            'get_site_url' => get_site_url()
+            'get_site_url' => get_site_url(),
+            'frontJS'  => Helper::assetUrl('/js/responsive_testemonial_carousel.js'),
+            'css' => Helper::assetUrl('/css/responsive_testemonial_carousel.css')
         ]);
     }
 	 function delete(Http $http,$id){

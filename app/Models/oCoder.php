@@ -11,7 +11,7 @@ class oCoder extends Eloquent
      *
      * @var string
      */
-    protected $table = 'ocoder_demo';
+    protected $table = 'owl_carousel_ocoder';
 
     /**
      * The attributes that are mass assignable.
