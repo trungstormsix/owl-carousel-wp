@@ -14,7 +14,9 @@
                     <img class="uc_author_avatar" src="{{ item.src }}" height="48" width="48" alt="" />
                     <div class="uc_author_info">
                         <div class="uc_name">{{ item.title }}</div>
-                        <div class="uc_company">@{{ item.info ? item.info : "company"}}</div>
+                        {% if(item.info) %}
+                            <div class="uc_company">{{ item.info}}</div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
